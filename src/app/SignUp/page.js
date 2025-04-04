@@ -6,6 +6,8 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
 export default function SignUpPage() {
+  const [firstName, setfirstName] = useState("");
+  const [lastName, setlastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -27,6 +29,20 @@ export default function SignUpPage() {
         <h1 className="text-2xl font-bold mb-4 text-center">Sign Up</h1>
         {error && <p className="text-red-500 text-sm">{error}</p>}
         <form onSubmit={handleSignUp} className="space-y-4">
+          <input
+            type="firstName"
+            placeholder="First Name"
+            value={firstName}
+            onChange={(e) => setfirstName(e.target.value)}
+            className="w-full px-3 py-2 bg-gray-700 rounded text-white"
+          />
+          <input
+            type="lastName"
+            placeholder="Last Name"
+            value={lastName}
+            onChange={(e) => setlastName(e.target.value)}
+            className="w-full px-3 py-2 bg-gray-700 rounded text-white"
+          />
           <input
             type="email"
             placeholder="Email"
