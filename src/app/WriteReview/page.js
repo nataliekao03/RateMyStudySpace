@@ -1,6 +1,5 @@
 import Form from "next/form";
 
-
 export default function page() {
   return (
     <div>
