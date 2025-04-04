@@ -23,11 +23,11 @@ const Navbar = () => {
               Write a Review
             </Button>
           </Link>
-          {/* <Link href="/Settings">
+          <Link href="/Map">
             <Button variant="outline" className="text-white">
-              Settings
+              Map View
             </Button>
-          </Link> */}
+          </Link>
         </div>
       </div>
     </nav>
