@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -9,8 +10,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { BookOpen, MapPin, Search, Star } from "lucide-react";
+import { BookOpen, MapPin, Search, Star, BotMessageSquare } from "lucide-react";
 import { useState } from "react";
+
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -135,6 +137,18 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* Chatbot Icon */}
+      <div className="fixed bottom-20 right-20 z-70">
+        <Link href="/chatbot">
+            <BotMessageSquare className="w-16 h-16 text-blue-600 cursor-pointer hover:scale-110 transition-transform" />
+        </Link>
+      </div>
+
+
+ 
+
+      
     </main>
   );
 }
