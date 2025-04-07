@@ -70,47 +70,53 @@ const Chatbot = () => {
   };
 
   return (
-    <div className="chatbot-container max-w-3xl mx-auto p-4 bg-white shadow-lg rounded-lg">
-      <div className="chatbox h-[70vh] overflow-y-auto p-4 bg-gray-50 rounded-md mb-4">
-        {/* Chat messages */}
-        <div className="messages mb-4">
+    <div className="max-w-3xl mx-auto p-4">
+      {/* Heading */}
+      <h1 className="text-2xl font-semibold mb-4 text-gray-800 text-center">How can I help?</h1>
+
+      {/* Chat Container */}
+      <div className="chatbot-container bg-white shadow-lg rounded-lg flex flex-col h-[75vh] p-4">
+        {/* Messages */}
+        <div className="flex-1 overflow-y-auto space-y-2 mb-4">
           {messages.map((msg, index) => (
             <div
               key={index}
-              className={`message ${
-                msg.sender === "user" ? "user-message" : "bot-message"
+              className={`max-w-[75%] px-4 py-2 rounded-lg ${
+                msg.sender === "user"
+                  ? "bg-blue-500 text-white self-end"
+                  : "bg-gray-200 text-gray-900 self-start"
               }`}
             >
-              <p>{msg.text}</p>
+              {msg.text}
             </div>
           ))}
         </div>
 
-        {/* Input field for sending messages */}
-        <div className="input-container flex items-center gap-2">
+        {/* Input */}
+        <div className="flex gap-2">
           <input
             type="text"
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
             placeholder="Type your message here..."
             disabled={loading}
-            className="w-full p-2 border rounded-lg"
+            className="flex-1 p-2 border rounded-lg"
           />
           <button
             onClick={handleSendMessage}
             disabled={loading}
-            className="bg-blue-600 text-white p-2 rounded-lg"
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg"
           >
             {loading ? "Thinking..." : "Send"}
           </button>
         </div>
       </div>
 
-      {/* Back button */}
-      <div className="back-button mt-4">
+      {/* Back Button */}
+      <div className="mt-4">
         <button
           onClick={back}
-          className="bg-gray-700 text-white p-2 rounded-lg w-full"
+          className="bg-gray-700 text-white w-full py-2 rounded-lg"
         >
           Go Back to Main Page
         </button>
