@@ -32,7 +32,6 @@ const Chatbot = () => {
               content: msg.text,
             })),
           ],
-          max_tokens: 150,
           temperature: 0.7,
           store: true,
         },
@@ -79,18 +78,22 @@ const Chatbot = () => {
         {/* Messages */}
         <div className="flex-1 overflow-y-auto space-y-2 mb-4">
           {messages.map((msg, index) => (
-            <div
-              key={index}
-              className={`max-w-[75%] px-4 py-2 rounded-lg ${
-                msg.sender === "user"
-                  ? "bg-blue-500 text-white self-end"
-                  : "bg-gray-200 text-gray-900 self-start"
-              }`}
-            >
-              {msg.text}
-            </div>
-          ))}
-        </div>
+    <div
+      key={index}
+      className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
+    >
+      <div
+        className={`px-4 py-2 rounded-xl text-sm max-w-[80%] break-words ${
+          msg.sender === "user"
+            ? "bg-blue-500 text-white rounded-br-none"
+            : "bg-gray-200 text-gray-900 rounded-bl-none"
+        }`}
+      >
+        {msg.text}
+      </div>
+    </div>
+  ))}
+</div>
 
         {/* Input */}
         <div className="flex gap-2">
