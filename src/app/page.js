@@ -150,7 +150,7 @@ export default function Home() {
       </section>
 
       {/* Featured Spaces Section */}
-      <section className="container mx-auto px-4 py-12">
+      {/* <section className="container mx-auto px-4 py-12">
         <h2 className="text-3xl font-bold text-blue-900 dark:text-blue-100 mb-8">
           Featured Study Spaces (Can remove, since we have a carousel above)
         </h2>
@@ -174,7 +174,7 @@ export default function Home() {
             </Card>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* Chatbot Icon */}
       <div className="fixed bottom-20 right-20 z-70">

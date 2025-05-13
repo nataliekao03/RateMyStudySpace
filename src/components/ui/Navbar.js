@@ -10,7 +10,7 @@ const Navbar = () => {
         <div className="space-x-4">
           <Link href="/Profile">
             <Button variant="outline" className="text-white">
-              View Profile
+              Profile
             </Button>
           </Link>
           <Link href="/Search">
@@ -23,11 +23,11 @@ const Navbar = () => {
               Write a Review
             </Button>
           </Link>
-          <Link href="/Map">
+          {/* <Link href="/Map">
             <Button variant="outline" className="text-white">
               Map View
             </Button>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </nav>

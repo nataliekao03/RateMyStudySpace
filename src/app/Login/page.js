@@ -68,6 +68,11 @@ export default function LoginPage() {
             Sign Up
           </a>
         </p>
+        <p className="text-center mt-4">
+          <a href="/" className="text-blue-400">
+            Back to Home
+          </a>
+        </p>
       </div>
     </div>
   );
