@@ -70,6 +70,11 @@ export default function SignUpPage() {
             </a>
           </p>
         </form>
+        <p className="text-center mt-4">
+          <a href="/" className="text-blue-400">
+            Continue Browsing Spaces
+          </a>
+        </p>
       </div>
     </div>
   );
