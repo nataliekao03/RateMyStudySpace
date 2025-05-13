@@ -19,18 +19,21 @@ export default function Home() {
 
   const featuredSpaces = [
     {
+      id: "library",
       title: "University Library",
       description: "Quiet study environment with individual desks",
       rating: 4.5,
       location: "Main Campus",
     },
     {
+      id: "coffee-lounge",
       title: "Coffee House Study Lounge",
       description: "Cozy atmosphere with free WiFi",
       rating: 4.2,
       location: "Downtown",
     },
     {
+      id: "student-center",
       title: "Student Center",
       description: "Group study rooms and collaborative spaces",
       rating: 4.0,
@@ -125,25 +128,27 @@ export default function Home() {
           {/* Carousel */}
           <div className="flex-1 max-h-[500px] overflow-x-auto space-y-4">
             {featuredSpaces.map((space, index) => (
-              <Card
-                key={index}
-                className="min-w-[300px] bg-white/50 dark:bg-slate-800/50 backdrop-blur hover:shadow-lg transition-shadow"
-              >
-                <CardHeader>
-                  <CardTitle>{space.title}</CardTitle>
-                  <CardDescription className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4" />
-                    {space.location}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="mb-4">{space.description}</p>
-                  <div className="flex items-center gap-1">
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    <span className="font-semibold">{space.rating}</span>
-                  </div>
-                </CardContent>
-              </Card>
+              <Link key={index} href={`/spaces/${space.id}`} className="block">
+                <Card
+                  key={index}
+                  className="min-w-[300px] bg-white/50 dark:bg-slate-800/50 backdrop-blur hover:shadow-lg transition-shadow"
+                >
+                  <CardHeader>
+                    <CardTitle>{space.title}</CardTitle>
+                    <CardDescription className="flex items-center gap-2">
+                      <MapPin className="w-4 h-4" />
+                      {space.location}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="mb-4">{space.description}</p>
+                    <div className="flex items-center gap-1">
+                      <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                      <span className="font-semibold">{space.rating}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>
