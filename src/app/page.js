@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { BookOpen, MapPin, Search, Star, BotMessageSquare } from "lucide-react";
 import { useState } from "react";
-
+import MapComponent from "@/components/Map";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -111,10 +111,48 @@ export default function Home() {
         </div>
       </section>
 
+      {/* mapview component Section */}
+      <section className="container mx-auto px-4 py-12">
+        <h2 className="text-3xl font-bold text-blue-900 dark:text-blue-100 mb-8">
+          Browse Study Spaces
+        </h2>
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Map */}
+          <div className="flex-1 rounded-2xl overflow-hidden shadow-lg border border-gray-300 dark:border-gray-700">
+            <MapComponent />
+          </div>
+
+          {/* Carousel */}
+          <div className="flex-1 max-h-[500px] overflow-x-auto space-y-4">
+            {featuredSpaces.map((space, index) => (
+              <Card
+                key={index}
+                className="min-w-[300px] bg-white/50 dark:bg-slate-800/50 backdrop-blur hover:shadow-lg transition-shadow"
+              >
+                <CardHeader>
+                  <CardTitle>{space.title}</CardTitle>
+                  <CardDescription className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4" />
+                    {space.location}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="mb-4">{space.description}</p>
+                  <div className="flex items-center gap-1">
+                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                    <span className="font-semibold">{space.rating}</span>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Featured Spaces Section */}
       <section className="container mx-auto px-4 py-12">
         <h2 className="text-3xl font-bold text-blue-900 dark:text-blue-100 mb-8">
-          Featured Study Spaces
+          Featured Study Spaces (Can remove, since we have a carousel above)
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {featuredSpaces.map((space, index) => (
@@ -140,15 +178,10 @@ export default function Home() {
 
       {/* Chatbot Icon */}
       <div className="fixed bottom-20 right-20 z-70">
-        <Link href="/Chatbot">
-            <BotMessageSquare className="w-16 h-16 text-blue-600 cursor-pointer hover:scale-110 transition-transform" />
+        <Link href="/chatbot">
+          <BotMessageSquare className="w-16 h-16 text-blue-600 cursor-pointer hover:scale-110 transition-transform" />
         </Link>
       </div>
-
-
- 
-
-      
     </main>
   );
 }
