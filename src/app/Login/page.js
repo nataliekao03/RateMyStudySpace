@@ -70,7 +70,7 @@ export default function LoginPage() {
         </p>
         <p className="text-center mt-4">
           <a href="/" className="text-blue-400">
-            Browse Spaces
+            Continue Browsing Spaces
           </a>
         </p>
       </div>

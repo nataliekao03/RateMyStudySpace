@@ -30,16 +30,16 @@ const Navbar = () => {
               {user ? "Profile" : "Login"}
             </Button>
           </Link>
-          <Link href="/Search">
+          {/* <Link href="/Search">
             <Button variant="outline" className="text-white">
               Search Study Spaces
             </Button>
-          </Link>
-          <Link href="/WriteReview">
+          </Link> */}
+          {/* <Link href="/WriteReview">
             <Button variant="outline" className="text-white">
               Write a Review
             </Button>
-          </Link>
+          </Link> */}
           {/* <Link href="/Map">
             <Button variant="outline" className="text-white">
               Map View
