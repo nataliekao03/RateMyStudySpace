@@ -70,7 +70,7 @@ export default function LoginPage() {
         </p>
         <p className="text-center mt-4">
           <a href="/" className="text-blue-400">
-            Back to Home
+            Browse Spaces
           </a>
         </p>
       </div>

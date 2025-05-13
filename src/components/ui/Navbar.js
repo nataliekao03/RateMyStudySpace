@@ -1,6 +1,23 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+import { onAuthStateChanged, getAuth } from "firebase/auth";
+import { app } from "@/lib/firebase"; // Adjust path to your Firebase config
+
 const Navbar = () => {
+  const [user, setUser] = useState(null);
+  const auth = getAuth(app);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe();
+  }, [auth]);
+
   return (
     <nav className="bg-gray-900 text-white p-4 shadow-lg">
       <div className="flex justify-between items-center">
@@ -8,9 +25,9 @@ const Navbar = () => {
           Rate My Study Space
         </Link>
         <div className="space-x-4">
-          <Link href="/Profile">
+          <Link href={user ? "/Profile" : "/Login"}>
             <Button variant="outline" className="text-white">
-              Profile
+              {user ? "Profile" : "Login"}
             </Button>
           </Link>
           <Link href="/Search">
