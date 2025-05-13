@@ -24,8 +24,8 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-      <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-96">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 text-gray-900">
+      <div className="bg-blue-100 p-8 rounded-lg shadow-md w-full max-w-md">
         <h1 className="text-2xl font-bold mb-4 text-center">Sign Up</h1>
         {error && <p className="text-red-500 text-sm">{error}</p>}
         <form onSubmit={handleSignUp} className="space-y-4">
@@ -34,28 +34,28 @@ export default function SignUpPage() {
             placeholder="First Name"
             value={firstName}
             onChange={(e) => setfirstName(e.target.value)}
-            className="w-full px-3 py-2 bg-gray-700 rounded text-white"
+            className="w-full px-3 py-2 bg-white border rounded"
           />
           <input
             type="lastName"
             placeholder="Last Name"
             value={lastName}
             onChange={(e) => setlastName(e.target.value)}
-            className="w-full px-3 py-2 bg-gray-700 rounded text-white"
+            className="w-full px-3 py-2 bg-white border rounded"
           />
           <input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-3 py-2 bg-gray-700 rounded text-white"
+            className="w-full px-3 py-2 bg-white border rounded"
           />
           <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-3 py-2 bg-gray-700 rounded text-white"
+            className="w-full px-3 py-2 bg-white border rounded"
           />
           <button
             type="submit"
