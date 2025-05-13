@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 const api_key = process.env.NEXT_PUBLIC_OPENAI_KEY;
 
 const Chatbot = () => {
-  const router = useRouter(); // Initialize the router
+  const router = useRouter();
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -24,7 +24,7 @@ const Chatbot = () => {
       const result = await axios.post(
         "https://api.openai.com/v1/chat/completions",
         {
-          model: "gpt-3.5-turbo", // Ensure correct model name
+          model: "gpt-3.5-turbo",
           messages: [
             { role: "system", content: "You are a study space expert." },
             ...newMessages.map((msg) => ({
@@ -34,65 +34,61 @@ const Chatbot = () => {
           ],
           max_tokens: 150,
           temperature: 0.7,
-          store: true,
         },
         {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${api_key}`,
-            
           },
         }
       );
 
-      // Extract the bot's response
-      const botResponse = result.data.choices[0].message.content; // Extract the bot's response
+      const botResponse = result.data.choices[0].message.content;
       setMessages([
         ...newMessages,
-        { text: botResponse, sender: "bot" }, // Add bot's response to the messages
+        { text: botResponse, sender: "bot" },
       ]);
     } catch (error) {
-      console.error("Error calling OpenAI API:", error); // Log error
+      console.error("Error calling OpenAI API:", error);
       setMessages([
         ...newMessages,
-        { text: "Sorry, something went wrong. Please try again later.", sender: "bot" }, // Error message
+        { text: "Sorry, something went wrong. Please try again later.", sender: "bot" },
       ]);
     } finally {
-      setLoading(false); // Stop loading
+      setLoading(false);
     }
   };
 
-
-
-  // Function to back out
   const back = () => {
     router.push("/");
   };
 
   return (
     <div className="max-w-3xl mx-auto p-4">
-      {/* Heading */}
-      <h1 className="text-2xl font-semibold mb-4 text-gray-800 text-center">How can I help?</h1>
+      <h1 className="text-2xl font-semibold mb-4 text-gray-800 text-center">
+        How can I help?
+      </h1>
 
-      {/* Chat Container */}
       <div className="chatbot-container bg-white shadow-lg rounded-lg flex flex-col h-[75vh] p-4">
-        {/* Messages */}
         <div className="flex-1 overflow-y-auto space-y-2 mb-4">
           {messages.map((msg, index) => (
             <div
               key={index}
-              className={`max-w-[75%] px-4 py-2 rounded-lg ${
-                msg.sender === "user"
-                  ? "bg-blue-500 text-white self-end"
-                  : "bg-gray-200 text-gray-900 self-start"
-              }`}
+              className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
             >
-              {msg.text}
+              <div
+                className={`px-4 py-2 rounded-xl text-sm max-w-[80%] break-words ${
+                  msg.sender === "user"
+                    ? "bg-blue-500 text-white rounded-br-none"
+                    : "bg-gray-200 text-gray-900 rounded-bl-none"
+                }`}
+              >
+                {msg.text}
+              </div>
             </div>
           ))}
         </div>
 
-        {/* Input */}
         <div className="flex gap-2">
           <input
             type="text"
@@ -112,7 +108,6 @@ const Chatbot = () => {
         </div>
       </div>
 
-      {/* Back Button */}
       <div className="mt-4">
         <button
           onClick={back}
