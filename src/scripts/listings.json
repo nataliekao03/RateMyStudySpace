@@ -1,0 +1,183 @@
+[
+  {
+    "id": "mlk",
+    "name": "Martin Luther King Library (MLK)",
+    "location": {
+      "lat": 37.3352,
+      "lng": -121.8811
+    },
+    "avgRating": 4.6,
+    "tags": ["quiet", "clean", "individual", "multi-floor"],
+    "photoUrls": [],
+    "reviews": [
+      {
+        "userId": "user_01",
+        "rating": 5,
+        "comment": "Perfect for quiet study. Love the upper floors.",
+        "timestamp": "2025-05-01T14:30:00Z"
+      },
+      {
+        "userId": "user_02",
+        "rating": 4,
+        "comment": "Gets crowded during finals but still solid.",
+        "timestamp": "2025-05-03T10:15:00Z"
+      }
+    ]
+  },
+  {
+    "id": "su",
+    "name": "Student Union (Diaz Compean)",
+    "location": {
+      "lat": 37.33621246372549,
+      "lng": -121.88136119065717
+    },
+    "avgRating": 4.0,
+    "tags": ["group-friendly", "casual", "food nearby", "lively"],
+    "photoUrls": [],
+    "reviews": [
+      {
+        "userId": "user_03",
+        "rating": 4,
+        "comment": "Great vibe for group work. Bit noisy though.",
+        "timestamp": "2025-04-27T16:00:00Z"
+      }
+    ]
+  },
+  {
+    "id": "isb",
+    "name": "Interdisciplinary Science Building (ISB)",
+    "location": {
+      "lat": 37.33317311292111,
+      "lng": -121.88293202845578
+    },
+    "avgRating": 4.2,
+    "tags": ["modern", "quiet", "tech-equipped"],
+    "photoUrls": [],
+    "reviews": []
+  },
+  {
+    "id": "bbc",
+    "name": "Boccardo Business Center (BBC)",
+    "location": {
+      "lat": 37.33651957339777,
+      "lng": -121.8788473645316
+    },
+    "avgRating": 4.1,
+    "tags": ["outdoor seating", "business students", "bright"],
+    "photoUrls": [],
+    "reviews": [
+      {
+        "userId": "user_04",
+        "rating": 4,
+        "comment": "Lots of sunlight. Decent seating options.",
+        "timestamp": "2025-05-06T09:45:00Z"
+      },
+      {
+        "userId": "user_05",
+        "rating": 3,
+        "comment": "Hard to find quiet during peak hours.",
+        "timestamp": "2025-05-07T12:20:00Z"
+      }
+    ]
+  },
+  {
+    "id": "engr",
+    "name": "College of Engineering (ENGR)",
+    "location": {
+      "lat": 37.33687926113086, 
+      "lng": -121.88114867991807
+    },
+    "avgRating": 4.3,
+    "tags": ["engineering students", "upper floor study areas", "quiet"],
+    "photoUrls": [],
+    "reviews": [
+      {
+        "userId": "user_06",
+        "rating": 5,
+        "comment": "Favorite spot between classes. Quiet corners on top floor.",
+        "timestamp": "2025-04-25T13:10:00Z"
+      }
+    ]
+  },
+  {
+    "id": "swc",
+    "name": "Student Wellness Center",
+    "location": {
+      "lat": 37.33493856371847, 
+      "lng": -121.88104720952133
+    },
+    "avgRating": 4.0,
+    "tags": ["relaxed", "group seating", "central location"],
+    "photoUrls": [],
+    "reviews": []
+  },
+  {
+    "id": "ssc",
+    "name": "Student Services Center",
+    "location": {
+      "lat": 37.33910496741813, 
+      "lng": -121.88104091521271
+    },
+    "avgRating": 4.0,
+    "tags": ["relaxed", "group seating", "central location"],
+    "photoUrls": [],
+    "reviews": [
+      {
+        "userId": "user_07",
+        "rating": 4,
+        "comment": "Underrated! Good place to focus in the mornings.",
+        "timestamp": "2025-04-29T08:30:00Z"
+      },
+      {
+        "userId": "user_08",
+        "rating": 4,
+        "comment": "Nice view and comfy chairs.",
+        "timestamp": "2025-05-01T17:00:00Z"
+      },
+      {
+        "userId": "user_09",
+        "rating": 5,
+        "comment": "Surprisingly peaceful despite being a service building.",
+        "timestamp": "2025-05-04T11:15:00Z"
+      }
+    ]
+  },
+  {
+    "id": "ch",
+    "name": "Clark Hall",
+    "location": {
+      "lat": 37.33608538045244, 
+      "lng": -121.882535874586
+    },
+    "avgRating": 4.0,
+    "tags": ["relaxed", "group seating", "central location"],
+    "photoUrls": [],
+    "reviews": [
+      {
+        "userId": "user_10",
+        "rating": 3,
+        "comment": "Not many seats but it’s quiet most of the time.",
+        "timestamp": "2025-05-02T15:40:00Z"
+      }
+    ]
+  },
+    {
+    "id": "srac",
+    "name": "Spartan Recreation Center",
+    "location": {
+      "lat": 37.334820847901774, 
+      "lng": -121.87930359417953
+    },
+    "avgRating": 4.0,
+    "tags": ["relaxed", "group seating", "central location"],
+    "photoUrls": [],
+    "reviews": [
+      {
+        "userId": "user_10",
+        "rating": 3,
+        "comment": "Not many seats but it’s quiet most of the time.",
+        "timestamp": "2025-05-02T15:40:00Z"
+      }
+    ]
+  }
+]
