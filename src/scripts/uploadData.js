@@ -1,3 +1,4 @@
+// To Run: node src/scripts/uploadData.js
 
 const admin = require("firebase-admin");
 const serviceAccount = require("../../serviceAccountKey.json");
