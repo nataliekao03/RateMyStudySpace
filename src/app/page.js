@@ -42,7 +42,7 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen bg-gray-100 text-black">
+    <main className="min-h-screen bg-gray-100 text-black pt-20 mb-8">
       {/* Hero Section */}
       <section className="max-w-4xl mx-auto px-4 py-16 text-center">
         <div className="text-center space-y-6">
@@ -64,7 +64,7 @@ export default function Home() {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
-            <Button className="bg-white-600 hover:bg-blue-700 text-sm">
+            <Button className="bg-white-600 hover:bg-blue-700 text-sm border">
               Search
             </Button>
           </div>
@@ -72,7 +72,7 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="mx-auto px-4 pb-20  lg:grid-cols-3 gap-8">
+      <section className="mx-auto px-4 pb-6 max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <Card className="rounded-2xl shadow hover:shadow-lg transition">
             <CardHeader>
@@ -116,43 +116,32 @@ export default function Home() {
 
       {/* mapview component Section */}
 
-      <section className="container mx-auto px-4 py-12">
-        <h2 className="text-3xl font-bold text-blue-900 dark:text-blue-100 mb-8">
-          Browse Study Spaces
-        </h2>
-
-        <div className="flex flex-col lg:flex-row gap-8">
+      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-900 dark:text-blue-100 mt-16 px-4 sm:px-8 lg:px-36 text-center lg:text-left">
+        Explore Study Spaces
+      </h2>
+      <section className="mx-auto px-4 py-12 max-w-7xl">
+        <div className="flex flex-col lg:flex-row gap-8 justify-center">
           {/* Map */}
-
-          <div className="flex-1 rounded-2xl overflow-hidden shadow-lg border border-gray-300 dark:border-gray-700">
+          <div className="w-full lg:w-[49%] rounded-2xl overflow-hidden shadow-lg border border-gray-300 dark:border-gray-700">
             <MapComponent />
           </div>
 
           {/* Carousel */}
-
-          <div className="flex-1 max-h-[500px] overflow-x-auto space-y-4">
+          <div className="w-full lg:w-[49%] max-h-[500px] overflow-x-auto space-y-4">
             {featuredSpaces.map((space, index) => (
               <Link key={index} href={`/spaces/${space.id}`} className="block">
-                <Card
-                  key={index}
-                  className="min-w-[300px] bg-white/50 dark:bg-slate-800/50 backdrop-blur hover:shadow-lg transition-shadow"
-                >
+                <Card className="min-w-[300px] bg-white/50 dark:bg-slate-800/50 backdrop-blur hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <CardTitle>{space.title}</CardTitle>
-
                     <CardDescription className="flex items-center gap-2">
                       <MapPin className="w-4 h-4" />
-
                       {space.location}
                     </CardDescription>
                   </CardHeader>
-
                   <CardContent>
                     <p className="mb-4">{space.description}</p>
-
                     <div className="flex items-center gap-1">
                       <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-
                       <span className="font-semibold">{space.rating}</span>
                     </div>
                   </CardContent>
@@ -164,13 +153,15 @@ export default function Home() {
       </section>
 
       {/* Chatbot Icon */}
-      <div className="fixed bottom-20 right-20 z-50 group">
-        <div className="absolute bottom-full mb-2 right-4 transform translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      {/* <div className="fixed bottom-20 right-20 z-50 group"> */}
+      <div className="fixed bottom-6 right-6 sm:bottom-10 sm:right-10 md:bottom-20 md:right-20 z-50 group">
+        <div className="hidden sm:block absolute bottom-full mb-2 right-4 transform translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <div className="bg-white text-black text-sm rounded-lg px-4 py-2 shadow-lg border border-gray-200 min-w-[150px] text-center">
             Hey there, I'm <span className="font-bold text-blue-600">Nook</span>
             ! Ask me about different study spaces near you!
           </div>
         </div>
+
         <Link href="/Chatbot">
           <BotMessageSquare className="w-16 h-16 text-blue-600 cursor-pointer hover:scale-110 transition-transform" />
         </Link>

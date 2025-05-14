@@ -23,7 +23,7 @@ export default function ProfilePage() {
   };
 
   return (
-    <div>
+    <div className="pt-20">
       <ProtectedRoute>
         <h1 className="text-4xl font-bold text-center mt-10">User Profile</h1>
         {/* Profile pic */}

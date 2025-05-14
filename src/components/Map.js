@@ -27,7 +27,7 @@ const MapComponent = () => {
   }
 
   return (
-    <div className="rounded-2xl overflow-hidden shadow-lg  w-full max-w-4xl h-[500px]">
+    <div className="rounded-2xl overflow-hidden shadow-lg w-full max-w-4xl h-[500px]">
       <GoogleMap
         mapContainerStyle={{ width: "100%", height: "100%" }}
         center={center}

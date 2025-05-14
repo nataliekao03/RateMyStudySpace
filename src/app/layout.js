@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AuthProvider } from "@/lib/AuthContext";
 import Navbar from "@/components/ui/Navbar";
+import Footer from "@/components/ui/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,10 @@ export default function RootLayout({ children }) {
             disableTransitionOnChange
           >
             <Navbar />
-            {children}
+            <div className="min-h-screen flex flex-col justify-between">
+              <main className="flex-grow">{children}</main>
+              <Footer />
+            </div>
           </ThemeProvider>
         </AuthProvider>
       </body>
