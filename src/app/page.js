@@ -197,7 +197,7 @@ export default function Home() {
             studying!
           </div>
         </div>
-        <Link href="/chatbot">
+        <Link href="/Chatbot">
           <BotMessageSquare className="w-16 h-16 text-blue-600 cursor-pointer hover:scale-110 transition-transform" />
         </Link>
       </div>
