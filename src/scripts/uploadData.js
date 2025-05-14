@@ -1,3 +1,5 @@
+// Upload study space listings and dummy reviews & ratings
+
 // To Run: node src/scripts/uploadData.js
 
 const admin = require("firebase-admin");
