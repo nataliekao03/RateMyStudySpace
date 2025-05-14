@@ -189,7 +189,14 @@ export default function Home() {
       </section> */}
 
       {/* Chatbot Icon */}
-      <div className="fixed bottom-20 right-20 z-70">
+      <div className="fixed bottom-20 right-20 z-50 group">
+        <div className="absolute bottom-full mb-2 right-0 transform translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="bg-white text-black text-sm rounded-lg px-4 py-2 shadow-lg border border-gray-200">
+            Ask <span className="font-bold text-blue-600">Nook</span>, your
+            personal study companion, about more study spaces or tips on
+            studying!
+          </div>
+        </div>
         <Link href="/chatbot">
           <BotMessageSquare className="w-16 h-16 text-blue-600 cursor-pointer hover:scale-110 transition-transform" />
         </Link>
