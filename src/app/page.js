@@ -163,38 +163,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Spaces Section */}
-      {/* <section className="container mx-auto px-4 py-12">
-        <h2 className="text-3xl font-bold  mb-8">Featured Study Spaces</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {featuredSpaces.map((space, index) => (
-            <Card key={index} className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <CardTitle>{space.title}</CardTitle>
-                <CardDescription className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4" />
-                  {space.location}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="mb-4">{space.description}</p>
-                <div className="flex items-center gap-1">
-                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  <span className="font-semibold">{space.rating}</span>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section> */}
-
       {/* Chatbot Icon */}
       <div className="fixed bottom-20 right-20 z-50 group">
-        <div className="absolute bottom-full mb-2 right-0 transform translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <div className="bg-white text-black text-sm rounded-lg px-4 py-2 shadow-lg border border-gray-200">
-            Ask <span className="font-bold text-blue-600">Nook</span>, your
-            personal study companion, about more study spaces or tips on
-            studying!
+        <div className="absolute bottom-full mb-2 right-4 transform translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="bg-white text-black text-sm rounded-lg px-4 py-2 shadow-lg border border-gray-200 min-w-[150px] text-center">
+            Hey there, I'm <span className="font-bold text-blue-600">Nook</span>
+            ! Ask me about different study spaces near you!
           </div>
         </div>
         <Link href="/Chatbot">
