@@ -15,11 +15,15 @@ import {
 import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 
 export default function SpaceDetailPage() {
   const { id } = useParams();
   const [space, setSpace] = useState(null);
   const [reviews, setReviews] = useState([]);
+  const MapComponent = dynamic(() => import("@/components/Map"), {
+    ssr: false,
+  });
 
   useEffect(() => {
     if (!id) return;
@@ -97,39 +101,57 @@ export default function SpaceDetailPage() {
         </Link>
       </div>
 
-      {/* Reviews Section */}
-      <div className="max-w-2xl mx-auto">
-        <h2 className="text-2xl font-semibold mb-4">All Reviews</h2>
-        {reviews.length === 0 && (
-          <p className="text-gray-500 italic">No reviews yet. Be the first!</p>
-        )}
+      {/* Reviews + Map Side-by-Side */}
+      <div className="flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto">
+        {/* Reviews Section */}
+        <div className="flex-1">
+          <h2 className="text-2xl font-semibold mb-4">All Reviews</h2>
+          {reviews.length === 0 && (
+            <p className="text-gray-500 italic">
+              No reviews yet. Be the first!
+            </p>
+          )}
 
-        <div className="space-y-6">
-          {reviews.map((review) => (
-            <div
-              key={review.id}
-              className="border border-gray-200 rounded-lg p-4 shadow-sm"
-            >
-              <div className="flex justify-between items-center mb-1">
-                <div className="flex items-center gap-1 text-yellow-500">
-                  <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                  <span className="font-medium">{review.rating}/5</span>
+          <div className="space-y-6">
+            {reviews.map((review) => (
+              <div
+                key={review.id}
+                className="border border-gray-200 rounded-lg p-4 shadow-sm"
+              >
+                <div className="flex justify-between items-center mb-1">
+                  <div className="flex items-center gap-1 text-yellow-500">
+                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    <span className="font-medium">{review.rating}/5</span>
+                  </div>
+                  <span className="text-sm text-gray-500">
+                    {new Date(
+                      review.timestamp?.seconds * 1000
+                    ).toLocaleDateString()}
+                  </span>
                 </div>
-                <span className="text-sm text-gray-500">
-                  {new Date(
-                    review.timestamp?.seconds * 1000
-                  ).toLocaleDateString()}
-                </span>
+                <p className="text-gray-800 mb-2">{review.comment}</p>
+                <div className="text-sm text-gray-600">
+                  <p>Wifi: {review.wifi}</p>
+                  <p>Noise: {review.noise}</p>
+                  <p>Rush: {review.rush}</p>
+                  <p>Hours Spent: {review.hoursSpent}</p>
+                </div>
               </div>
-              <p className="text-gray-800 mb-2">{review.comment}</p>
-              <div className="text-sm text-gray-600">
-                <p>Wifi: {review.wifi}</p>
-                <p>Noise: {review.noise}</p>
-                <p>Rush: {review.rush}</p>
-                <p>Hours Spent: {review.hoursSpent}</p>
-              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Map Section */}
+        <div className="w-full lg:w-[500px]">
+          {space?.location ? (
+            <MapComponent
+              spots={[{ id, name: space.name, ...space.location }]}
+            />
+          ) : (
+            <div className="text-center text-gray-500">
+              No location data available
             </div>
-          ))}
+          )}
         </div>
       </div>
     </div>
