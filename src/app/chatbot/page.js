@@ -3,9 +3,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { BotMessageSquare } from "lucide-react";
-import { ArrowLeft } from "lucide-react";
+import { BotMessageSquare, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeSanitize from "rehype-sanitize";
 
 const api_key = process.env.NEXT_PUBLIC_OPENAI_KEY;
 
@@ -29,13 +31,18 @@ const Chatbot = () => {
         {
           model: "gpt-3.5-turbo",
           messages: [
-            { role: "system", content: "You are a study space expert." },
+            { role: "system", content: 
+              `You are Nook, a friendly and concise study space assistant helping students at San Jose State University.
+Always format your responses clearly using (**Markdown format**). Use bullet points or numbered lists for locations and make sure to keep spacing between.
+Respond in a warm, informative tone and avoid redundant wrap-ups like 'explore these options'.
+Only include addresses when relevant, and keep each item to 1–2 lines.` 
+             },
             ...newMessages.map((msg) => ({
               role: msg.sender === "user" ? "user" : "assistant",
               content: msg.text,
             })),
           ],
-          max_tokens: 150,
+          max_tokens: 400,
           temperature: 0.7,
         },
         {
@@ -70,7 +77,7 @@ const Chatbot = () => {
     <div className="mt-4 ml-4 mb-4 pt-20">
       <Link
         href="/"
-        className=" fixed left-6 inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors mb-4"
+        className="fixed left-6 inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors mb-4"
       >
         <ArrowLeft className="w-5 h-5 mr-1" />
         Back to Home
@@ -105,7 +112,12 @@ const Chatbot = () => {
                       : "bg-gray-200 text-gray-900 rounded-bl-none"
                   }`}
                 >
-                  {msg.text}
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    rehypePlugins={[rehypeSanitize]}
+                  >
+                    {msg.text}
+                  </ReactMarkdown>
                 </div>
               </div>
             ))}
