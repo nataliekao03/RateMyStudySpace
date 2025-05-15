@@ -171,12 +171,12 @@ export default function Home() {
                 href={`/spaces/${space.id}`}
                 className="block"
               >
-                <Card className="flex min-w-[300px] bg-white backdrop-blur hover:shadow-lg transition-shadow">
+                <Card className="flex items-center min-w-[300px] bg-white backdrop-blur hover:shadow-lg transition-shadow p-4">
                   <Image
                     src={`/images/${space.id}.png`}
-                    width={400}
-                    height={50}
-                    className="w-40 h-full object-cover rounded-l"
+                    width={160}
+                    height={160}
+                    className="object-cover rounded-xl"
                     alt={space.id}
                   />
                   <div className="flex flex-col justify-between p-4 flex-grow h-full">
