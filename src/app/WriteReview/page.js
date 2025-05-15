@@ -6,12 +6,17 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import { db } from "@/lib/firebase"; // your firebase config
 import { doc, collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useRouter } from "next/navigation";
+import { getDocs, updateDoc } from "firebase/firestore";
+import { useParams } from "next/navigation";
+import { getDoc, query, orderBy } from "firebase/firestore";
 
 export default function WriteReviewPage() {
   const searchParams = useSearchParams();
   const spaceName = searchParams.get("id") || "Unknown Space";
   const { user } = useUser(); // get current user
   const router = useRouter();
+  const { id } = useParams();
+  const [space, setSpace] = useState(null);
 
   const [rating, setRating] = useState(0);
   const [wifi, setWifi] = useState("");
@@ -31,11 +36,11 @@ export default function WriteReviewPage() {
     }
 
     try {
-      const reviewRef = collection(
-        doc(db, "study_spaces", spaceName),
-        "reviews"
-      );
-      await addDoc(reviewRef, {
+      const spaceRef = doc(db, "study_spaces", id);
+      const reviewsRef = collection(spaceRef, "reviews");
+
+      // Add new review
+      await addDoc(reviewsRef, {
         rating,
         wifi,
         noise,
@@ -45,12 +50,45 @@ export default function WriteReviewPage() {
         timestamp: serverTimestamp(),
         userId: user.uid,
       });
+
+      // Fetch all reviews to recalculate avgRating
+      const reviewsSnapshot = await getDocs(reviewsRef);
+      const ratings = reviewsSnapshot.docs.map((doc) => doc.data().rating);
+      const newAvgRating =
+        ratings.reduce((acc, cur) => acc + cur, 0) / ratings.length;
+
+      // Update avgRating field in study space document
+      await updateDoc(spaceRef, {
+        avgRating: parseFloat(newAvgRating.toFixed(2)), // round to 2 decimals
+      });
+
       setSubmitStatus("Review submitted successfully!");
     } catch (error) {
-      console.error("Error adding review:", error);
+      console.error("Error submitting review or updating avgRating:", error);
       setSubmitStatus("Error submitting review. Try again.");
     }
   };
+
+  useEffect(() => {
+    if (!id) return;
+
+    const fetchSpace = async () => {
+      try {
+        const docRef = doc(db, "study_spaces", id);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          setSpace(docSnap.data());
+        } else {
+          console.warn("No such study space found!");
+        }
+      } catch (err) {
+        console.error("Error fetching space:", err);
+      }
+    };
+
+    fetchSpace();
+  }, [id]);
 
   return (
     <ProtectedRoute>
@@ -61,7 +99,7 @@ export default function WriteReviewPage() {
           </a>
         </p>
         <h1 className="text-4xl font-bold text-center mb-10">
-          Writing a Review for {spaceName}
+          Writing a Review for {spaceName || "Unknown Space"}
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-8">

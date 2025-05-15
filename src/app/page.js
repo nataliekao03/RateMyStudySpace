@@ -192,14 +192,14 @@ export default function Home() {
                     </CardContent>
                   </div>
                   <div className="absolute bottom-8 right-8 hover:shadow-lg">
-                    <Link href={`/WriteReview?id=${space.id}`}>
+                    <a href={`/WriteReview?id=${space.id}`}>
                       <Button
                         variant="outline"
                         className="text-sm px-3 py-1 text-black border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 transition-colors duration-200 rounded-md shadow-sm"
                       >
                         Write a Review
                       </Button>
-                    </Link>
+                    </a>
                   </div>
                 </Card>
               </Link>
