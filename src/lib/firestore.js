@@ -14,12 +14,29 @@ export async function getBasicListings() {
   //     tags,
   //   };
   // });
+  //REWRITE TO EXCLUDE REVIEWS (TO OPTMIZE)
   const snapshot = await getDocs(collection(db, "study_spaces"));
   const listings = snapshot.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),
   }));
   return listings;
+}
+
+export async function getListingById(id) {
+  try {
+    const docRef = doc(db, "study_spaces", id);
+    const docSnap = await getDoc(docRef);
+
+    if (!docSnap.exists()) {
+      throw new Error(`Listing with ID "${id}" not found.`);
+    }
+
+    return { id: docSnap.id, ...docSnap.data() };
+  } catch (error) {
+    console.error("Error fetching listing:", error);
+    throw error;
+  }
 }
 
 // Get full listing data including reviews
