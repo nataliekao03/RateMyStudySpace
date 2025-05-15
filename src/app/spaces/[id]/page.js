@@ -17,20 +17,7 @@ export default function SpaceDetailPage() {
           Back to Home
         </a>
       </p>
-
-      {/* header */}
-      <div className="w-full h-96 flex items-center justify-center">
-        <h1 className="text-3xl font-bold">Study Space Details</h1>
-      </div>
-
-        {/* Photo carousel */}
-        {/* View all photos Button */}
-        {/* Name of study space */}
-        {/* Map view? */}
-        {/* Ratings */}
-        {/* List of Reviews */}
-        {/* Write a Review Button */}
-
+      <h1 className="text-3xl font-bold">Study Space Details</h1>
       <p className="mt-4">You are viewing details for space ID: {id}</p>
       {/* In a real app, fetch data from Firebase using this ID */}
       <Link href="/WriteReview">
