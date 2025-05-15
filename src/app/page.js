@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,12 +12,34 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { BookOpen, MapPin, Search, Star, BotMessageSquare } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MapComponent from "@/components/Map";
+import { useRouter } from "next/navigation";
+import { getBasicListings } from "@/lib/firestore";
+import Stars from "@/components/ui/Stars";
+
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
+  const router = useRouter();
+  const [spaces, setSpaces] = useState([]);
 
+  //retireve listings from DB
+  useEffect(() => {
+    getBasicListings()
+      .then((spaces) => {
+        console.log("Fetched data:", spaces);
+        setSpaces(spaces);
+      })
+      .catch(console.error);
+  }, []);
+
+  //navigate to directory of listings
+  const handleSpaceClick = () => {
+    router.push(`/directory`);
+  };
+
+  //dummy data
   const featuredSpaces = [
     {
       id: "library",
@@ -74,7 +97,10 @@ export default function Home() {
       {/* Features Section */}
       <section className="mx-auto px-4 pb-6 max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <Card className="rounded-2xl shadow hover:shadow-lg transition">
+          <Card
+            onClick={handleSpaceClick}
+            className="rounded-2xl shadow hover:shadow-lg transition"
+          >
             <CardHeader>
               <CardTitle className="text-xl">
                 <MapPin className="inline w-4 h-4 mr-1" />
@@ -115,7 +141,6 @@ export default function Home() {
       </section>
 
       {/* mapview component Section */}
-
       <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-900 dark:text-blue-100 mt-16 px-4 sm:px-8 lg:px-36 text-center lg:text-left">
         Explore Study Spaces
       </h2>
@@ -128,7 +153,40 @@ export default function Home() {
 
           {/* Carousel */}
           <div className="w-full lg:w-[49%] max-h-[500px] overflow-x-auto space-y-4">
-            {featuredSpaces.map((space, index) => (
+            {spaces.map((space) => (
+              <Link
+                key={space.id}
+                href={`/spaces/${space.id}`}
+                className="block"
+              >
+                <Card className="flex min-w-[300px] bg-white backdrop-blur hover:shadow-lg transition-shadow">
+                  <Image
+                    src={`/images/${space.id}.png`}
+                    width={400}
+                    height={50}
+                    className="w-40 h-full object-cover rounded-l"
+                    alt={space.id}
+                  />
+                  <div className="flex flex-col justify-between p-4 flex-grow h-full">
+                    <CardHeader>
+                      <CardTitle>{space.name}</CardTitle>
+                      <CardDescription className="flex items-center gap-2">
+                        {/* <MapPin className="w-4 h-4" />
+                      {space.location} */}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      {/* <p className="mb-4">{space.description}</p> */}
+                      <div className="flex items-center gap-1">
+                        <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                        <span className="font-semibold">{space.avgRating}</span>
+                      </div>
+                    </CardContent>
+                  </div>
+                </Card>
+              </Link>
+            ))}
+            {/* {featuredSpaces.map((space, index) => (
               <Link key={index} href={`/spaces/${space.id}`} className="block">
                 <Card className="min-w-[300px] bg-white/50 dark:bg-slate-800/50 backdrop-blur hover:shadow-lg transition-shadow">
                   <CardHeader>
@@ -147,7 +205,7 @@ export default function Home() {
                   </CardContent>
                 </Card>
               </Link>
-            ))}
+            ))} */}
           </div>
         </div>
       </section>
