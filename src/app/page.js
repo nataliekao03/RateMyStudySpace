@@ -24,6 +24,16 @@ export default function Home() {
   const router = useRouter();
   const [spaces, setSpaces] = useState([]);
 
+  const mapSpots = spaces
+  .filter(space => space.location) // ensure location exists
+  .map(space => ({
+    id: space.id,
+    name: space.name,
+    lat: space.location.lat || space.location.latitude,
+    lng: space.location.lng || space.location.longitude,
+  }));
+
+
   //retireve listings from DB
   useEffect(() => {
     getBasicListings()
@@ -38,6 +48,8 @@ export default function Home() {
   const handleSpaceClick = () => {
     router.push(`/directory`);
   };
+
+  
 
   //dummy data
   const featuredSpaces = [
@@ -148,7 +160,7 @@ export default function Home() {
         <div className="flex flex-col lg:flex-row gap-8 justify-center">
           {/* Map */}
           <div className="w-full lg:w-[49%] rounded-2xl overflow-hidden shadow-lg border border-gray-300 dark:border-gray-700">
-            <MapComponent />
+            <MapComponent spots={mapSpots}/>
           </div>
 
           {/* Carousel */}

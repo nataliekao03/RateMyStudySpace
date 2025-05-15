@@ -9,18 +9,24 @@ import {
 
 const center = { lat: 37.7749, lng: -122.4194 }; // Bay Area
 
-const spots = [
-  { id: 1, name: "Study Spot 1", lat: 37.7749, lng: -122.4194 },
-  { id: 2, name: "Study Spot 2", lat: 37.7849, lng: -122.4294 },
-  { id: 3, name: "Study Spot 3", lat: 37.7949, lng: -122.4394 },
-];
+// const spots = [
+//   { id: 1, name: "Study Spot 1", lat: 37.7749, lng: -122.4194 },
+//   { id: 2, name: "Study Spot 2", lat: 37.7849, lng: -122.4294 },
+//   { id: 3, name: "Study Spot 3", lat: 37.7949, lng: -122.4394 },
+// ];
 
-const MapComponent = () => {
-  const zoom = 12;
+const MapComponent = ({ spots = [] }) => {
+  const zoom = 16;
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
   });
+
+  // If no spots provided, use a fallback center
+  const fallbackCenter = { lat: 37.3352, lng: -121.8811 }; // SJSU?
+  const center = spots.length > 0
+    ? { lat: spots[0].lat, lng: spots[0].lng }
+    : fallbackCenter;
 
   if (!isLoaded) {
     return <div className="text-center">Loading Map...</div>;
@@ -37,7 +43,7 @@ const MapComponent = () => {
           <Marker
             key={spot.id}
             position={{ lat: spot.lat, lng: spot.lng }}
-            label={spot.name}
+            label={spot.id}
             title={spot.name}
           />
         ))}
