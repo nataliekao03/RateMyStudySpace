@@ -18,21 +18,19 @@ import { useRouter } from "next/navigation";
 import { getBasicListings } from "@/lib/firestore";
 import Stars from "@/components/ui/Stars";
 
-
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
   const [spaces, setSpaces] = useState([]);
 
   const mapSpots = spaces
-  .filter(space => space.location) // ensure location exists
-  .map(space => ({
-    id: space.id,
-    name: space.name,
-    lat: space.location.lat || space.location.latitude,
-    lng: space.location.lng || space.location.longitude,
-  }));
-
+    .filter((space) => space.location) // ensure location exists
+    .map((space) => ({
+      id: space.id,
+      name: space.name,
+      lat: space.location.lat || space.location.latitude,
+      lng: space.location.lng || space.location.longitude,
+    }));
 
   //retireve listings from DB
   useEffect(() => {
@@ -48,8 +46,6 @@ export default function Home() {
   const handleSpaceClick = () => {
     router.push(`/directory`);
   };
-
-  
 
   //dummy data
   const featuredSpaces = [
@@ -160,7 +156,7 @@ export default function Home() {
         <div className="flex flex-col lg:flex-row gap-8 justify-center">
           {/* Map */}
           <div className="w-full lg:w-[49%] rounded-2xl overflow-hidden shadow-lg border border-gray-300 dark:border-gray-700">
-            <MapComponent spots={mapSpots}/>
+            <MapComponent spots={mapSpots} />
           </div>
 
           {/* Carousel */}
@@ -171,7 +167,7 @@ export default function Home() {
                 href={`/spaces/${space.id}`}
                 className="block"
               >
-                <Card className="flex items-center min-w-[300px] bg-white backdrop-blur hover:shadow-lg transition-shadow p-4">
+                <Card className="relative flex items-center min-w-[300px] bg-white border border-blue-400 backdrop-blur hover:shadow-lg transition-shadow p-4">
                   <Image
                     src={`/images/${space.id}.png`}
                     width={160}
@@ -179,7 +175,7 @@ export default function Home() {
                     className="object-cover rounded-xl"
                     alt={space.id}
                   />
-                  <div className="flex flex-col justify-between p-4 flex-grow h-full">
+                  <div className="flex flex-col justify-between p-2 flex-grow h-full">
                     <CardHeader>
                       <CardTitle>{space.name}</CardTitle>
                       <CardDescription className="flex items-center gap-2">
@@ -194,6 +190,16 @@ export default function Home() {
                         <span className="font-semibold">{space.avgRating}</span>
                       </div>
                     </CardContent>
+                  </div>
+                  <div className="absolute bottom-8 right-8 hover:shadow-lg">
+                    <Link href={`/WriteReview?id=${space.id}`}>
+                      <Button
+                        variant="outline"
+                        className="text-sm px-3 py-1 text-black border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 transition-colors duration-200 rounded-md shadow-sm"
+                      >
+                        Write a Review
+                      </Button>
+                    </Link>
                   </div>
                 </Card>
               </Link>
