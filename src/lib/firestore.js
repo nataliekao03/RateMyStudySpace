@@ -3,23 +3,34 @@ import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 
 // Get minimal data for all listings
 export async function getBasicListings() {
-  // const snapshot = await getDocs(collection(db, "study_spaces"));
-  // return snapshot.docs.map(doc => {
-  //   const { name, avgRating, reviews = [], tags } = doc.data();
-  //   return {
-  //     id: doc.id,
-  //     name,
-  //     avgRating,
-  //     reviewCount: reviews.length ?? 0,
-  //     tags,
-  //   };
-  // });
-  //REWRITE TO EXCLUDE REVIEWS (TO OPTMIZE)
   const snapshot = await getDocs(collection(db, "study_spaces"));
   const listings = snapshot.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),
   }));
+  return listings;
+}
+
+export async function getVeryBasicListings() {
+  const q = query(
+    collection(db, "study_spaces"),
+    select("name", "avgRating", "reviews") // ✅Only retrieve these fields
+  );
+
+  const snapshot = await getDocs(q);
+  const listings = snapshot.docs.map((doc) => {
+    const data = doc.data();
+    const { name, avgRating, reviews = [] } = data;
+
+    return {
+      id: doc.id,
+      name,
+      avgRating,
+      reviewCount: reviews.length,
+      location,
+    };
+  });
+
   return listings;
 }
 

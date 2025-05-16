@@ -14,7 +14,7 @@ import Stars from "@/components/ui/Stars";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { getBasicListings } from "@/lib/firestore";
+import { getVeryBasicListings, getBasicListings } from "@/lib/firestore";
 
 export default function directoryPage() {
   const [spaces, setSpaces] = useState([]);

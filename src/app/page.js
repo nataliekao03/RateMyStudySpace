@@ -15,7 +15,7 @@ import { BookOpen, MapPin, Search, Star, BotMessageSquare } from "lucide-react";
 import { useEffect, useState } from "react";
 import MapComponent from "@/components/Map";
 import { useRouter } from "next/navigation";
-import { getBasicListings } from "@/lib/firestore";
+import { getVeryBasicListings, getBasicListings } from "@/lib/firestore";
 import Stars from "@/components/ui/Stars";
 
 export default function Home() {
@@ -110,9 +110,9 @@ export default function Home() {
             className="rounded-2xl shadow hover:shadow-lg transition"
           >
             <CardHeader>
-              <CardTitle className="text-xl">
-                <MapPin className="inline w-4 h-4 mr-1" />
-                Find Spaces
+              <CardTitle className="text-2xl gap-2">
+                <MapPin className="inline text-blue-600" />
+                 Find Spaces
               </CardTitle>
               <CardDescription>
                 Discover study spots near you with detailed information and
@@ -207,26 +207,6 @@ export default function Home() {
                 </Card>
               </Link>
             ))}
-            {/* {featuredSpaces.map((space, index) => (
-              <Link key={index} href={`/spaces/${space.id}`} className="block">
-                <Card className="min-w-[300px] bg-white/50 dark:bg-slate-800/50 backdrop-blur hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <CardTitle>{space.title}</CardTitle>
-                    <CardDescription className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4" />
-                      {space.location}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="mb-4">{space.description}</p>
-                    <div className="flex items-center gap-1">
-                      <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                      <span className="font-semibold">{space.rating}</span>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))} */}
           </div>
         </div>
       </section>
