@@ -12,10 +12,12 @@ import { getDoc, query, orderBy } from "firebase/firestore";
 
 export default function WriteReviewPage() {
   const searchParams = useSearchParams();
-  const spaceName = searchParams.get("id") || "Unknown Space";
+  //const spaceName = searchParams.get("id") || "Unknown Space";
   const { user } = useUser(); // get current user
   const router = useRouter();
-  const { id } = useParams();
+  const id = searchParams.get("id");
+  const spaceName = id || "Unknown Space";
+
   const [space, setSpace] = useState(null);
 
   const [rating, setRating] = useState(0);
@@ -36,6 +38,9 @@ export default function WriteReviewPage() {
     }
 
     try {
+      if (!db) {
+  throw new Error("Firestore db is undefined");
+}
       const spaceRef = doc(db, "study_spaces", id);
       const reviewsRef = collection(spaceRef, "reviews");
 
