@@ -66,11 +66,11 @@ export default function SpaceDetailPage() {
   return (
     <div className="container px-4 py-24">
       {/* Back Button */}
-      <div className="mb-4">
+      {/* <div className="mb-4">
         <Link href="/" className="text-blue-500 hover:underline">
           ← Back to Home
         </Link>
-      </div>
+      </div> */}
 
       {/* Header */}
       <div className="w-full relative mb-8 h-64 rounded-xl overflow-hidden">
@@ -88,8 +88,8 @@ export default function SpaceDetailPage() {
         <div className="absolute bottom-4 left-6 z-20 text-white">
           <h1 className="text-3xl font-bold">{space?.name || "Study Space"}</h1>
           {reviews.length > 0 && (
-            <div className="mt-2 flex items-center gap-2 text-yellow-400">
-              <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+            <div className="mt-2 flex items-center gap-2 text-amber-300">
+              {/* <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" /> */}
               <Stars rating={space?.avgRating?.toFixed(1)} />
               {/* <span className="text-lg font-semibold">
                 {space?.avgRating?.toFixed(1)}
@@ -147,9 +147,10 @@ export default function SpaceDetailPage() {
                 className="border border-gray-200 rounded-lg p-4 shadow-sm"
               >
                 <div className="flex justify-between items-center mb-1">
-                  <div className="flex items-center gap-1 text-yellow-500">
-                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                    <span className="font-medium">{review.rating}/5</span>
+                  <div className="flex items-center gap-1 my-4 text-yellow-500">
+                    {/* <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    <span className="font-medium">{review.rating}/5</span> */}
+                    <Stars rating={review.rating} />
                   </div>
                   <span className="text-sm text-gray-500">
                     {new Date(
