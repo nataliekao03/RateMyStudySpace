@@ -1,8 +1,8 @@
 # Rate My Study Space 🌟
 
-A community-driven app designed for students to discover, rate, and review study spaces on SJSU campus💙💛 The goal is to help SJSU students find the perfect study space tailored to their preferences, increase their productivity, and improve their overall campus experience✨ 
+![alt text](image.png)
 
-![logo](https://github.com/nataliekao03/RateMyStudySpace/public/rmss_logo_crop.png?raw=true)
+A community-driven app designed for students to discover, rate, and review study spaces on SJSU campus💙💛 The goal is to help SJSU students find the perfect study space tailored to their preferences, increase their productivity, and improve their overall campus experience✨ 
 
 
 ## 🌐 Visit our live website!
