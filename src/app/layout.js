@@ -11,7 +11,7 @@ export const metadata = {
   title: "Rate My Study Space",
   description: "Find and rate the best study spots near you",
   icons: {
-    icon: "/rmss_logo.png", // ✅ path from /public
+    icon: "/rmss_logo_crop.ico", 
   },
 };
 
