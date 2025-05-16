@@ -11,7 +11,7 @@ import rehypeSanitize from "rehype-sanitize";
 
 const api_key = process.env.NEXT_PUBLIC_OPENAI_KEY;
 
-const Chatbot = () => {
+const chatbot = () => {
   const router = useRouter();
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState("");
@@ -146,4 +146,4 @@ Only include addresses when relevant, and keep each item to 1–2 lines.`
   );
 };
 
-export default Chatbot;
+export default chatbot;

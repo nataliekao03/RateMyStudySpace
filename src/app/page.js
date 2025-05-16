@@ -149,7 +149,7 @@ export default function Home() {
       </section>
 
       {/* mapview component Section */}
-      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-900 dark:text-blue-100 mt-16 px-4 sm:px-8 lg:px-36 text-center lg:text-left">
+      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-900 dark:text-blue-400 mt-16 px-4 sm:px-8 lg:px-36 text-center lg:text-left">
         Explore Study Spaces
       </h2>
       <section className="mx-auto px-4 py-12 max-w-7xl">
@@ -221,7 +221,7 @@ export default function Home() {
           </div>
         </div>
 
-        <Link href="/Chatbot">
+        <Link href="/chatbot">
           <BotMessageSquare className="w-16 h-16 text-blue-600 cursor-pointer hover:scale-110 transition-transform" />
         </Link>
       </div>
