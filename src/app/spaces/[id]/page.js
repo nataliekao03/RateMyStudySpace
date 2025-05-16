@@ -13,9 +13,18 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { Button } from "@/components/ui/button";
-import { Star } from "lucide-react";
+import { Star, House } from "lucide-react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
+import Stars from "@/components/ui/Stars";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 export default function SpaceDetailPage() {
   const { id } = useParams();
@@ -73,7 +82,7 @@ export default function SpaceDetailPage() {
           objectFit="cover"
           className="z-0"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-60 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-60 z-10" />
 
         {/* Text Content */}
         <div className="absolute bottom-4 left-6 z-20 text-white">
@@ -81,31 +90,50 @@ export default function SpaceDetailPage() {
           {reviews.length > 0 && (
             <div className="mt-2 flex items-center gap-2 text-yellow-400">
               <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-              <span className="text-lg font-semibold">
+              <Stars rating={space?.avgRating?.toFixed(1)} />
+              {/* <span className="text-lg font-semibold">
                 {space?.avgRating?.toFixed(1)}
-              </span>
-              <span className="text-sm text-gray-300">
+              </span> */}
+              {/* <span className="text-sm text-gray-300">
                 ({reviews.length} review{reviews.length > 1 ? "s" : ""})
-              </span>
+              </span> */}
             </div>
           )}
         </div>
+        {/* Write Review Button */}
+        <div className="absolute bottom-0 right-6 z-10">
+          <div className="text-center mb-8">
+            <Link href={`/WriteReview?id=${id}`}>
+              <Button className=" bg-sky-400 text-white hover:bg-sky-800">
+                Write a Review
+              </Button>
+            </Link>
+          </div>
+        </div>
       </div>
 
-      {/* Write Review Button */}
-      <div className="text-center mb-8">
-        <Link href={`/WriteReview?id=${id}`}>
-          <Button className="bg-blue-100 text-blue-700 hover:bg-blue-200">
-            Write a Review
-          </Button>
-        </Link>
+      <div className="flex items-center space-x-2 text-2xl font-semibold m-5">
+        <House />
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem className="font-bold text-decoration-line: underline">
+              <BreadcrumbPage>{space?.name}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
       </div>
 
       {/* Reviews + Map Side-by-Side */}
       <div className="flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto">
         {/* Reviews Section */}
         <div className="flex-1">
-          <h2 className="text-2xl font-semibold mb-4">All Reviews</h2>
+          <h2 className="text-2xl font-semibold mb-4">
+            Browse {reviews.length} Review{reviews.length > 1 ? "s" : ""}
+          </h2>
           {reviews.length === 0 && (
             <p className="text-gray-500 italic">
               No reviews yet. Be the first!
