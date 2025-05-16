@@ -1,16 +1,33 @@
-## How to run Rate My Study Space
+# Rate My Study Space 🌟
 
-1. npm install
+A community-driven app designed for students to discover, rate, and review study spaces on SJSU campus💙💛 The goal is to help SJSU students find the perfect study space tailored to their preferences, increase their productivity, and improve their overall campus experience✨ 
 
-2. add api keys in .env file
-
-3. npm run dev
-
-4. Open [http://localhost:3000](http://localhost:3000) in browser
+![logo](https://github.com/nataliekao03/RateMyStudySpace/public/rmss_logo_crop.png?raw=true)
 
 
-## Deploy on Vercel
+## 🌐 Visit our live website!
+[https://ratemystudyspace.vercel.app](https://ratemystudyspace.vercel.app/)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## How to run locally
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+#### 1. Clone Github Repository
+    git clone https://github.com/nataliekao03/RateMyStudySpace
+    cd rateMyStudySpace
+
+#### 2. Install Dependencies
+    npm install
+
+#### 3. Add API keys to the template .env file
+for Firebase Authentication, Firestore, Google Maps, & OpenAI
+
+    NEXT_PUBLIC_API_KEY = <your-api-key>
+    NEXT_PUBLIC_AUTH_DOMAIN = <your-api-key>
+    NEXT_PUBLIC_PROJECT_ID = <your-api-key>
+    NEXT_PUBLIC_APP_ID = <your-api-key>
+    NEXT_PUBLIC_GOOGLE_MAPS_API_KEY = <your-api-key>
+    NEXT_PUBLIC_OPENAI_KEY= <your-api-key>
+
+#### 4. Run the development server
+    npm run dev
+
+#### 5. Open [http://localhost:3000](http://localhost:3000) in your browser.
