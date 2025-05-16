@@ -91,137 +91,198 @@ export default function WriteReviewPage() {
   }, [id]);
 
   return (
-    <ProtectedRoute>
-      <div className="max-w-3xl mx-auto py-28 px-4">
-        <p className="text-left mt-4 mb-4">
-          <a onClick={() => router.back()} className="text-blue-400">
-            ← Go Back
-          </a>
-        </p>
-        <h1 className="text-4xl font-bold text-center mb-10">
-          Writing a Review for {spaceName || "Unknown Space"}
+      <div className="min-h-screen bg-white px-8">
+      <ProtectedRoute>
+        <h1 className="text-4xl font-bold text-center mt-12 mb-12">
+          Review & Rating
         </h1>
 
-        <form onSubmit={handleSubmit} className="space-y-8">
-          {/* Rating */}
-          <div>
-            <label className="text-xl font-semibold block mb-2">
-              Star Rating
-            </label>
-            <div className="flex space-x-2">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <button
-                  type="button"
-                  key={star}
-                  onClick={() => setRating(star)}
-                  className={`text-2xl ${
-                    rating >= star ? "text-yellow-400" : "text-gray-300"
-                  }`}
-                >
-                  ★
-                </button>
-              ))}
-            </div>
-          </div>
+        {/* Star Rating (mandatory)*/}
+        <h2 className="text-2xl font-semibold mb-4">
+          How would you rate this Space?
+        </h2>
 
-          {/* Wifi */}
-          <div>
-            <label className="text-xl font-semibold block mb-2">
-              How was the WiFi?
-            </label>
-            <select
-              className="border border-gray-300 rounded p-2 w-full"
-              value={wifi}
-              onChange={(e) => setWifi(e.target.value)}
-              required
-            >
-              <option value="">Select one</option>
-              <option value="high">High</option>
-              <option value="moderate">Moderate</option>
-              <option value="low">Low</option>
-              <option value="did not use it">Did not use it</option>
-            </select>
-          </div>
+        {/* <Rating onClick={(rating) => console.log(rating)}/>  */}
 
-          {/* Noise */}
-          <div>
-            <label className="text-xl font-semibold block mb-2">
-              Noise Levels
-            </label>
-            <select
-              className="border border-gray-300 rounded p-2 w-full"
-              value={noise}
-              onChange={(e) => setNoise(e.target.value)}
-              required
-            >
-              <option value="">Select one</option>
-              <option value="quiet">Quiet</option>
-              <option value="moderate">Moderate</option>
-              <option value="loud">Loud</option>
-            </select>
-          </div>
+        {/* Select tags - What do u like about it */}
+        <h2 className="text-2xl font-semibold mt-10 mb-4">What do you like about it?</h2>
+        <div className="flex gap-4 mb-8">
+          <button
+          type="submit"
+          className="border border-gray-300 px-6 py-2 rounded-md hover:bg-gray-100 transition"
+        >
+          Wifi
+        </button>
+        <button
+          type="submit"
+          className="border border-gray-300 px-6 py-2 rounded-md hover:bg-gray-100 transition"
+        >
+          Outlets
+        </button>
+        <button
+          type="submit"
+          className="border border-gray-300 px-6 py-2 rounded-md hover:bg-gray-100 transition"
+        >
+          Clean
+        </button>
+        </div>
 
-          {/* Hours spent */}
-          <div>
-            <label className="text-xl font-semibold block mb-2">
-              Hours Spent
-            </label>
-            <input
-              type="number"
-              min="0"
-              value={hoursSpent}
-              onChange={(e) => setHoursSpent(e.target.value)}
-              className="border border-gray-300 rounded p-2 w-full"
-              required
-            />
-          </div>
+        <Form>
+          {/* Add photos (optional, max 5 photos) */}
+          <h2 className="text-2xl font-semibold  mt-10 mb-2">Upload Photos</h2>
+          <input type="file" accept="image/*" multiple className="block mb-4" />
 
-          {/* Rush */}
-          <div>
-            <label className="text-xl font-semibold block mb-2">
-              Crowd Level
-            </label>
-            <select
-              className="border border-gray-300 rounded p-2 w-full"
-              value={rush}
-              onChange={(e) => setRush(e.target.value)}
-              required
-            >
-              <option value="">Select one</option>
-              <option value="low">Low</option>
-              <option value="moderate">Moderate</option>
-              <option value="high">High</option>
-            </select>
-          </div>
-
-          {/* Review Comment */}
-          <div>
-            <label className="text-xl font-semibold block mb-2">
-              Write a Review
-            </label>
-            <textarea
-              className="border border-gray-300 rounded p-2 w-full h-32"
-              placeholder="Share your thoughts..."
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              required
-            />
-          </div>
-
-          {/* Submit Button */}
+          {/* Comments about Study space */}
+          <h2 className="text-2xl font-semibold mb-2">Write a Review</h2>
+          <div className="flex items-center gap-4">
+          <input
+            name="review"
+            type="text"
+            placeholder="Write your review here..."
+            required
+            className="flex-grow border border-gray-300 py-2 px-4 rounded-md"
+          />
           <button
             type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded"
-          >
-            Submit Review
-          </button>
+            className="bg-blue-600 text-white font-semibold py-2 px-6 rounded-md hover:bg-blue-700 transition"
+          >Submit</button>
+          </div>
+        </Form>
 
-          {/* Status */}
-          {submitStatus && (
-            <p className="mt-4 text-center text-green-600">{submitStatus}</p>
-          )}
-        </form>
-      </div>
-    </ProtectedRoute>
+        {/* Submit button */}
+      </ProtectedRoute>
+    </div>
+    // <ProtectedRoute>
+    //   <div className="max-w-3xl mx-auto py-28 px-4">
+    //     <p className="text-left mt-4 mb-4">
+    //       <a onClick={() => router.back()} className="text-blue-400">
+    //         ← Go Back
+    //       </a>
+    //     </p>
+    //     <h1 className="text-4xl font-bold text-center mb-10">
+    //       Writing a Review for {spaceName || "Unknown Space"}
+    //     </h1>
+
+    //     <form onSubmit={handleSubmit} className="space-y-8">
+    //       {/* Rating */}
+    //       <div>
+    //         <label className="text-xl font-semibold block mb-2">
+    //           Star Rating
+    //         </label>
+    //         <div className="flex space-x-2">
+    //           {[1, 2, 3, 4, 5].map((star) => (
+    //             <button
+    //               type="button"
+    //               key={star}
+    //               onClick={() => setRating(star)}
+    //               className={`text-2xl ${
+    //                 rating >= star ? "text-yellow-400" : "text-gray-300"
+    //               }`}
+    //             >
+    //               ★
+    //             </button>
+    //           ))}
+    //         </div>
+    //       </div>
+
+    //       {/* Wifi */}
+    //       <div>
+    //         <label className="text-xl font-semibold block mb-2">
+    //           How was the WiFi?
+    //         </label>
+    //         <select
+    //           className="border border-gray-300 rounded p-2 w-full"
+    //           value={wifi}
+    //           onChange={(e) => setWifi(e.target.value)}
+    //           required
+    //         >
+    //           <option value="">Select one</option>
+    //           <option value="high">High</option>
+    //           <option value="moderate">Moderate</option>
+    //           <option value="low">Low</option>
+    //           <option value="did not use it">Did not use it</option>
+    //         </select>
+    //       </div>
+
+    //       {/* Noise */}
+    //       <div>
+    //         <label className="text-xl font-semibold block mb-2">
+    //           Noise Levels
+    //         </label>
+    //         <select
+    //           className="border border-gray-300 rounded p-2 w-full"
+    //           value={noise}
+    //           onChange={(e) => setNoise(e.target.value)}
+    //           required
+    //         >
+    //           <option value="">Select one</option>
+    //           <option value="quiet">Quiet</option>
+    //           <option value="moderate">Moderate</option>
+    //           <option value="loud">Loud</option>
+    //         </select>
+    //       </div>
+
+    //       {/* Hours spent */}
+    //       <div>
+    //         <label className="text-xl font-semibold block mb-2">
+    //           Hours Spent
+    //         </label>
+    //         <input
+    //           type="number"
+    //           min="0"
+    //           value={hoursSpent}
+    //           onChange={(e) => setHoursSpent(e.target.value)}
+    //           className="border border-gray-300 rounded p-2 w-full"
+    //           required
+    //         />
+    //       </div>
+
+    //       {/* Rush */}
+    //       <div>
+    //         <label className="text-xl font-semibold block mb-2">
+    //           Crowd Level
+    //         </label>
+    //         <select
+    //           className="border border-gray-300 rounded p-2 w-full"
+    //           value={rush}
+    //           onChange={(e) => setRush(e.target.value)}
+    //           required
+    //         >
+    //           <option value="">Select one</option>
+    //           <option value="low">Low</option>
+    //           <option value="moderate">Moderate</option>
+    //           <option value="high">High</option>
+    //         </select>
+    //       </div>
+
+    //       {/* Review Comment */}
+    //       <div>
+    //         <label className="text-xl font-semibold block mb-2">
+    //           Write a Review
+    //         </label>
+    //         <textarea
+    //           className="border border-gray-300 rounded p-2 w-full h-32"
+    //           placeholder="Share your thoughts..."
+    //           value={comment}
+    //           onChange={(e) => setComment(e.target.value)}
+    //           required
+    //         />
+    //       </div>
+
+    //       {/* Submit Button */}
+    //       <button
+    //         type="submit"
+    //         className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded"
+    //       >
+    //         Submit Review
+    //       </button>
+
+    //       {/* Status */}
+    //       {submitStatus && (
+    //         <p className="mt-4 text-center text-green-600">{submitStatus}</p>
+    //       )}
+    //     </form>
+    //   </div>
+    // </ProtectedRoute>
   );
 }
