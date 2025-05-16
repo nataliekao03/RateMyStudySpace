@@ -26,7 +26,7 @@ const Navbar = () => {
           href="/"
           className="hidden sm:flex items-center gap-2 text-2xl font-bold"
         >
-          Rate My Study Space
+          
         </Link>
 
         <div className="absolute left-1/2 -translate-x-1/2">

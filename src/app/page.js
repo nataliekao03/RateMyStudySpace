@@ -47,38 +47,28 @@ export default function Home() {
     router.push(`/directory`);
   };
 
-  //dummy data
-  const featuredSpaces = [
-    {
-      id: "library",
-      title: "University Library",
-      description: "Quiet study environment with individual desks",
-      rating: 4.5,
-      location: "Main Campus",
-    },
-    {
-      id: "coffee-lounge",
-      title: "Coffee House Study Lounge",
-      description: "Cozy atmosphere with free WiFi",
-      rating: 4.2,
-      location: "Downtown",
-    },
-    {
-      id: "student-center",
-      title: "Student Center",
-      description: "Group study rooms and collaborative spaces",
-      rating: 4.0,
-      location: "North Campus",
-    },
-  ];
-
   return (
-    <main className="min-h-screen bg-gray-100 text-black pt-20 mb-8">
+    <main className="min-h-screen bg-gray-100 text-black pt-10 mb-8">
       {/* Hero Section */}
-      <section className="max-w-4xl mx-auto px-4 py-16 text-center">
-        <div className="text-center space-y-6">
-          <h1 className="text-4xl font-bold">Rate My Study Space</h1>
-          <p className="text-lg  mb-8">
+      <section className="relative w-full mx-auto px-4 py-40 text-center">
+        {/* Image Header */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={`/images/sjsu.jpg`}
+            alt="sjsu"
+            layout="fill"
+            objectFit="cover"
+            className="z-0"
+          />
+          <div className="absolute inset-0 bg-black opacity-60 z-10" />
+        </div>
+
+        {/* text content */}
+        <div className="relative text-center space-y-6">
+          <h1 className="text-4xl font-extrabold text-white">
+            Rate My Study Space
+          </h1>
+          <p className="text-lg  mb-8 font-light text-white">
             Find the perfect spot to study, work, or collaborate. Read reviews
             from fellow students and share your experiences.
           </p>
@@ -95,7 +85,7 @@ export default function Home() {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
-            <Button className="bg-white-600 hover:bg-blue-700 text-sm border">
+            <Button className="bg-white-600 bg-blue-700 text-sm  text-white">
               Search
             </Button>
           </div>
@@ -103,7 +93,7 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="mx-auto px-4 pb-6 max-w-7xl">
+      <section className="mx-auto px-4 py-10 pb-5 max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <Card
             onClick={handleSpaceClick}
@@ -112,7 +102,7 @@ export default function Home() {
             <CardHeader>
               <CardTitle className="text-2xl gap-2">
                 <MapPin className="inline text-blue-600" />
-                 Find Spaces
+                Find Spaces
               </CardTitle>
               <CardDescription>
                 Discover study spots near you with detailed information and
@@ -149,9 +139,9 @@ export default function Home() {
       </section>
 
       {/* mapview component Section */}
-      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-900 dark:text-blue-100 mt-16 px-4 sm:px-8 lg:px-36 text-center lg:text-left">
+      {/* <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-900 dark:text-blue-100 mt-16 px-4 sm:px-8 lg:px-36 text-center lg:text-left">
         Explore Study Spaces
-      </h2>
+      </h2> */}
       <section className="mx-auto px-4 py-12 max-w-7xl">
         <div className="flex flex-col lg:flex-row gap-8 justify-center">
           {/* Map */}
