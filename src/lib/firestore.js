@@ -11,28 +11,28 @@ export async function getBasicListings() {
   return listings;
 }
 
-export async function getVeryBasicListings() {
-  const q = query(
-    collection(db, "study_spaces"),
-    select("name", "avgRating", "reviews") // ✅Only retrieve these fields
-  );
+// export async function getVeryBasicListings() {
+//   const q = query(
+//     collection(db, "study_spaces"),
+//     select("name", "avgRating", "reviews") // ✅Only retrieve these fields
+//   );
 
-  const snapshot = await getDocs(q);
-  const listings = snapshot.docs.map((doc) => {
-    const data = doc.data();
-    const { name, avgRating, reviews = [] } = data;
+//   const snapshot = await getDocs(q);
+//   const listings = snapshot.docs.map((doc) => {
+//     const data = doc.data();
+//     const { name, avgRating, reviews = [] } = data;
 
-    return {
-      id: doc.id,
-      name,
-      avgRating,
-      reviewCount: reviews.length,
-      location,
-    };
-  });
+//     return {
+//       id: doc.id,
+//       name,
+//       avgRating,
+//       reviewCount: reviews.length,
+//       location,
+//     };
+//   });
 
-  return listings;
-}
+//   return listings;
+// }
 
 export async function getListingById(id) {
   try {
