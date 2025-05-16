@@ -7,7 +7,6 @@ import { db } from "@/lib/firebase"; // your firebase config
 import { doc, collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { getDocs, updateDoc } from "firebase/firestore";
-import { useParams } from "next/navigation";
 import { getDoc, query, orderBy } from "firebase/firestore";
 
 export default function WriteReviewPage() {
