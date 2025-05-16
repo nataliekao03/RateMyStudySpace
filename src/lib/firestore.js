@@ -11,28 +11,12 @@ export async function getBasicListings() {
   return listings;
 }
 
-// export async function getVeryBasicListings() {
-//   const q = query(
-//     collection(db, "study_spaces"),
-//     select("name", "avgRating", "reviews") // ✅Only retrieve these fields
-//   );
 
-//   const snapshot = await getDocs(q);
-//   const listings = snapshot.docs.map((doc) => {
-//     const data = doc.data();
-//     const { name, avgRating, reviews = [] } = data;
-
-//     return {
-//       id: doc.id,
-//       name,
-//       avgRating,
-//       reviewCount: reviews.length,
-//       location,
-//     };
-//   });
-
-//   return listings;
-// }
+export async function getReviewCount(spaceId) {
+  const reviewsRef = collection(db, "study_spaces", spaceId, "reviews");
+  const snapshot = await getDocs(reviewsRef);
+  return snapshot.size;
+}
 
 export async function getListingById(id) {
   try {
@@ -49,17 +33,3 @@ export async function getListingById(id) {
     throw error;
   }
 }
-
-// Get full listing data including reviews
-// export async function getFullListingById(id) {
-//   const docRef = doc(db, "study_spaces", id);
-//   const docSnap = await getDoc(docRef);
-//   if (!docSnap.exists()) throw new Error("Listing not found");
-
-//   const data = docSnap.data();
-
-//   const reviewsSnap = await getDocs(collection(docRef, "reviews"));
-//   const reviews = reviewsSnap.docs.map((d) => ({ id: d.id, ...d.data() }));
-
-//   return { id, ...data, reviews };
-// }

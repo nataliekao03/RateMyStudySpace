@@ -15,7 +15,7 @@ import { BookOpen, MapPin, Search, Star, BotMessageSquare } from "lucide-react";
 import { useEffect, useState } from "react";
 import MapComponent from "@/components/Map";
 import { useRouter } from "next/navigation";
-import { getVeryBasicListings, getBasicListings } from "@/lib/firestore";
+import { getReviewCount, getBasicListings } from "@/lib/firestore";
 import Stars from "@/components/ui/Stars";
 
 export default function Home() {
@@ -176,10 +176,10 @@ export default function Home() {
                     </CardHeader>
                     <CardContent>
                       {/* <p className="mb-4">{space.description}</p> */}
-                      <div className="flex items-center gap-4 font-light text-gray-400 text-sm">
+                      <div className="flex flex-col items-start gap-4 font-light text-gray-400 text-sm">
                         {/* <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" /> */}
                         <Stars rating={space?.avgRating?.toFixed(1)} />
-                        {/* <p> {space.avgRating} </p> */}
+                        {/* <p> {space?.id?.reviews?.length ?? 0} reviews </p> */}
                         {/*x reviews*/} {/* Browse {reviews.length} Review{reviews.length > 1 ? "s" : ""} */}
                         {/* <span className="font-semibold">{space.avgRating}</span> */}
                       </div>
