@@ -157,7 +157,8 @@ export default function Home() {
                 href={`/spaces/${space.id}`}
                 className="block"
               >
-                <Card className="relative flex items-center min-w-[300px] bg-white border border-blue-400 backdrop-blur hover:shadow-lg transition-shadow p-4">
+                <Card className="relative flex items-center min-w-[300px] border hover:border-blue-400 backdrop-blur hover:shadow-lg transition-shadow p-4">
+                {/* <Card className="relative flex items-center min-w-[300px] bg-white border border-blue-400 backdrop-blur hover:shadow-lg transition-shadow p-4"> */}
                   <Image
                     src={`/images/${space.id}.png`}
                     width={160}
