@@ -175,16 +175,20 @@ export default function Home() {
                     </CardHeader>
                     <CardContent>
                       {/* <p className="mb-4">{space.description}</p> */}
-                      <div className="flex items-center gap-1">
-                        <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                        <span className="font-semibold">{space.avgRating}</span>
+                      <div className="flex items-center gap-4 font-light text-gray-400 text-sm">
+                        {/* <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" /> */}
+                        <Stars rating={space?.avgRating?.toFixed(1)} />
+                        {/* <p> {space.avgRating} </p> */}
+                        {/*x reviews*/} {/* Browse {reviews.length} Review{reviews.length > 1 ? "s" : ""} */}
+                        {/* <span className="font-semibold">{space.avgRating}</span> */}
                       </div>
                     </CardContent>
                   </div>
                   <div className="absolute bottom-8 right-8 hover:shadow-lg">
                     <Button
                       variant="outline"
-                      className="text-sm px-3 py-1 text-black border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 transition-colors duration-200 rounded-md shadow-sm"
+                      // className="text-sm px-3 py-1 text-black border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 transition-colors duration-200 rounded-md shadow-sm"
+                      className="text-sm px-3 py-1 text-black border hover:bg-sky-300 hover:text-white transition-colors duration-200 rounded-md shadow-sm"
                       onClick={(e) => {
                         e.preventDefault(); // prevent parent <Link> navigation
                         e.stopPropagation(); // avoid bubbling
