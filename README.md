@@ -1,12 +1,11 @@
 # Rate My Study Space 🌟
 
-![alt text](image.png)
+![alt text](image-3.png)
 
 A community-driven app designed for students to discover, rate, and review study spaces on SJSU campus💙💛 The goal is to help SJSU students find the perfect study space tailored to their preferences, increase their productivity, and improve their overall campus experience✨ 
 
-
-## 🌐 Visit our live website!
-[https://ratemystudyspace.vercel.app](https://ratemystudyspace.vercel.app/)
+## ~~🌐 Visit our live website!~~
+~~[https://ratemystudyspace.vercel.app](https://ratemystudyspace.vercel.app/)~~
 
 ## How to run locally
 
