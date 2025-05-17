@@ -1,100 +1,133 @@
 // "use client";
+// import { useEffect, useState } from "react";
 // import { useRouter } from "next/navigation";
 // import { signOut } from "firebase/auth";
-// import { auth } from "@/lib/firebase";
-// import { useEffect, useState } from "react";
+// import { auth, db } from "@/lib/firebase";
+// import { onAuthStateChanged } from "firebase/auth";
+// import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+// import Link from "next/link";
 
 // import ProtectedRoute from "@/components/ProtectedRoute";
 
 // export default function ProfilePage() {
 //   const router = useRouter();
+//   const [user, setUser] = useState(null);
+//   const [userReviews, setUserReviews] = useState([]);
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+//       if (firebaseUser) {
+//         setUser(firebaseUser);
+//         await fetchUserReviews(firebaseUser.uid);
+//       } else {
+//         router.push("/Login");
+//       }
+//     });
+
+//     return () => unsubscribe();
+//   }, []);
+
+//   const fetchUserReviews = async (userId) => {
+//     setLoading(true); // Start loading
+
+//     try {
+//       const studySpacesSnapshot = await getDocs(collection(db, "study_spaces"));
+//       const reviews = [];
+
+//       for (const spaceDoc of studySpacesSnapshot.docs) {
+//         const spaceData = spaceDoc.data();
+//         const reviewsRef = collection(
+//           db,
+//           "study_spaces",
+//           spaceDoc.id,
+//           "reviews"
+//         );
+//         const reviewSnapshot = await getDocs(reviewsRef);
+
+//         reviewSnapshot.forEach((reviewDoc) => {
+//           const reviewData = reviewDoc.data();
+//           if (reviewData.userId === userId) {
+//             reviews.push({
+//               ...reviewData,
+//               spaceName: spaceData.name,
+//               spaceLocation: spaceData.location,
+//             });
+//           }
+//         });
+//       }
+
+//       setUserReviews(reviews);
+//     } catch (err) {
+//       console.error("Error fetching user reviews:", err);
+//     } finally {
+//       setLoading(false); // Stop loading
+//     }
+//   };
 
 //   const handleLogout = async () => {
 //     try {
 //       await signOut(auth);
-//       router.push("/Login"); // Redirect to login page after logout
+//       router.push("/Login");
 //     } catch (err) {
-//       console.error("Error logging out: ", err.message);
+//       console.error("Error logging out:", err.message);
 //     }
 //   };
 
-//   const handleSettings = async () => {
+//   const handleSettings = () => {
 //     router.push("/Settings");
 //   };
 
 //   return (
-//     <div className="bg-gray-100 min-h-screen py-40">
+//     <div className="bg-gray-100 min-h-screen py-10 pt-28">
 //       <ProtectedRoute>
+//         {/* Back Button */}
+//         <div className="mb-4">
+//           <Link href="/" className="text-blue-500 hover:underline ml-8">
+//             ← Back to Home
+//           </Link>
+//         </div>
+//         <h1 className="text-4xl font-bold text-center mb-10">Profile</h1>
 //         <div className="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-md">
-//           {/* Top Navigation Tabs */}
-//           <div className="flex justify-around mb-6 text-gray-600 text-sm font-semibold">
-//             <span>Explore</span>
-//             <span>Categories</span>
-//             <span className="text-blue-600 border-b-2 border-blue-600 pb-1">
-//               Places
-//             </span>
-//             <span>Profile</span>
-//           </div>
+//           {/* Top Tabs */}
 
 //           {/* Profile Info */}
 //           <div className="flex items-center justify-between">
 //             <div className="flex items-center space-x-4">
-//               <img
-//                 src="/avatar.png" // Replace with actual avatar path
-//                 alt="Profile"
-//                 className="w-20 h-20 rounded-full"
-//               />
 //               <div>
-//                 <h2 className="text-xl font-bold">Emma Hayes</h2>
-//                 <p className="text-gray-600">@EmmaHayes12</p>
-//                 <p className="text-gray-500 text-sm">emmahayes@gmail.com</p>
+//                 <h2 className="text-xl font-bold">
+//                   {/* {user?.displayName || "Anonymous"} */}
+//                   Hi there!
+//                 </h2>
+//                 <p className="text-gray-500 text-sm">{user?.email}</p>
 //               </div>
 //             </div>
-//             <button
-//               onClick={handleSettings}
-//               className="border border-blue-600 text-blue-600 px-4 py-2 rounded-md hover:bg-blue-100"
-//             >
-//               Settings
-//             </button>
 //           </div>
 
 //           {/* Previously Reviewed */}
 //           <div className="mt-10">
 //             <h3 className="text-lg font-semibold mb-4">Previously Reviewed</h3>
-//             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-//               <div className="bg-blue-50 p-4 rounded-lg">
-//                 <p className="font-medium">Five Study</p>
-//                 <p className="text-sm text-gray-500">Oval, New York</p>
+
+//             {userReviews.length === 0 ? (
+//               <p className="text-gray-500">
+//                 You haven’t reviewed any places yet.
+//               </p>
+//             ) : (
+//               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+//                 {userReviews.map((review, idx) => (
+//                   <div key={idx} className="bg-blue-50 p-4 rounded-lg">
+//                     <p className="font-medium">{review.spaceName}</p>
+//                     <p className="text-sm mt-2">
+//                       ⭐ {review.rating} - {review.comment}
+//                     </p>
+//                   </div>
+//                 ))}
 //               </div>
-//               <div className="bg-blue-50 p-4 rounded-lg">
-//                 <p className="font-medium">OVALSTUDY</p>
-//                 <p className="text-sm text-gray-500">Oval, New York</p>
-//               </div>
-//               <div className="bg-blue-50 p-4 rounded-lg">
-//                 <p className="font-medium">OVALSTUDY</p>
-//                 <p className="text-sm text-gray-500">Oval, New York</p>
-//               </div>
-//             </div>
+//             )}
 //           </div>
 
-//           {/* Favorites */}
-//           <div className="mt-10">
-//             <h3 className="text-lg font-semibold mb-4">Your Favourite</h3>
-//             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-//               <div className="bg-blue-50 p-4 rounded-lg">
-//                 <p className="font-medium">Five Study</p>
-//                 <p className="text-sm text-gray-500">Oval, New York</p>
-//               </div>
-//               <div className="bg-blue-50 p-4 rounded-lg">
-//                 <p className="font-medium">Five Study</p>
-//                 <p className="text-sm text-gray-500">Oval, New York</p>
-//               </div>
-//               <div className="bg-blue-50 p-4 rounded-lg">
-//                 <p className="font-medium">Five Study</p>
-//                 <p className="text-sm text-gray-500">Oval, New York</p>
-//               </div>
-//             </div>
-//           </div>
+//           {/* Favorites (optional – implement separately if needed) */}
+//           {/* You can add a `favorites` subcollection to the user doc and map them here */}
 
 //           {/* Logout Button */}
 //           <div className="flex justify-center mt-10">
@@ -111,20 +144,20 @@
 //   );
 // }
 "use client";
+
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { signOut } from "firebase/auth";
+import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "@/lib/firebase";
-import { onAuthStateChanged } from "firebase/auth";
-import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import Link from "next/link";
-
 import ProtectedRoute from "@/components/ProtectedRoute";
 
 export default function ProfilePage() {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [userReviews, setUserReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
@@ -140,6 +173,7 @@ export default function ProfilePage() {
   }, []);
 
   const fetchUserReviews = async (userId) => {
+    setLoading(true);
     try {
       const studySpacesSnapshot = await getDocs(collection(db, "study_spaces"));
       const reviews = [];
@@ -169,6 +203,8 @@ export default function ProfilePage() {
       setUserReviews(reviews);
     } catch (err) {
       console.error("Error fetching user reviews:", err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -194,27 +230,32 @@ export default function ProfilePage() {
             ← Back to Home
           </Link>
         </div>
-        <h1 className="text-4xl font-bold text-center mb-10">Profile</h1>
-        <div className="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-md">
-          {/* Top Tabs */}
 
+        <h1 className="text-4xl font-bold text-center mb-10">Profile</h1>
+
+        <div className="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-md">
           {/* Profile Info */}
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div>
-                <h2 className="text-xl font-bold">
-                  {/* {user?.displayName || "Anonymous"} */}
-                  Hi there!
-                </h2>
+                <h2 className="text-xl font-bold">Hi there!</h2>
                 <p className="text-gray-500 text-sm">{user?.email}</p>
               </div>
             </div>
+            <button
+              onClick={handleSettings}
+              className="border border-blue-600 text-blue-600 px-4 py-2 rounded-md hover:bg-blue-100"
+            >
+              Settings
+            </button>
           </div>
 
           {/* Previously Reviewed */}
           <div className="mt-10">
             <h3 className="text-lg font-semibold mb-4">Previously Reviewed</h3>
-            {userReviews.length === 0 ? (
+            {loading ? (
+              <p className="text-gray-500">Loading your reviews...</p>
+            ) : userReviews.length === 0 ? (
               <p className="text-gray-500">
                 You haven’t reviewed any places yet.
               </p>
@@ -231,9 +272,6 @@ export default function ProfilePage() {
               </div>
             )}
           </div>
-
-          {/* Favorites (optional – implement separately if needed) */}
-          {/* You can add a `favorites` subcollection to the user doc and map them here */}
 
           {/* Logout Button */}
           <div className="flex justify-center mt-10">
