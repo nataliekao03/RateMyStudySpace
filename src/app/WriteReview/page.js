@@ -36,10 +36,15 @@ export default function WriteReviewPage() {
       return;
     }
 
+    if (rating === 0) {
+      setSubmitStatus("Please select a star rating before submitting.");
+      return;
+    }
+
     try {
       if (!db) {
-  throw new Error("Firestore db is undefined");
-}
+        throw new Error("Firestore db is undefined");
+      }
       const spaceRef = doc(db, "study_spaces", id);
       const reviewsRef = collection(spaceRef, "reviews");
 
@@ -118,6 +123,7 @@ export default function WriteReviewPage() {
                   type="button"
                   key={star}
                   onClick={() => setRating(star)}
+                  required
                   className={`text-2xl ${
                     rating >= star ? "text-yellow-400" : "text-gray-300"
                   }`}
@@ -126,6 +132,12 @@ export default function WriteReviewPage() {
                 </button>
               ))}
             </div>
+            {submitStatus ===
+              "Please select a star rating before submitting." && (
+              <p className="text-red-500 mt-2">
+                You must select a star rating.
+              </p>
+            )}
           </div>
 
           {/* Wifi */}
